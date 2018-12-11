@@ -1,21 +1,85 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<nav class="navbar navbar-dark bg-dark">
+  <!-- Navbar content -->
+  <a class="navbar-brand  mb-0 h1" href="#">
+    <!--<img src="http://images2.fanpop.com/images/photos/3300000/Bender-futurama-3305909-1280-960.jpg" width="40" height="30" class="d-inline-block align-top" alt="">-->
+    Analista de Suporte
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link" id="pillshomeTab" (click)="selectTab('homeTab')" #pillsHomeTab data-toggle="pill" href="#pillsHome" [ngClass]="isSelected(pillsHomeTab)" role="tab" aria-controls="pills-home" aria-selected="true">Q1</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pillsprofileTab" (click)="selectTab('profileTab')" #pillsProfileTab data-toggle="pill" href="#profileTab" [ngClass]="isSelected(pillsProfileTab)" role="tab" aria-controls="pills-profile" aria-selected="false">Q2</a>
+      </li>
+    </ul>
+  </a>
+</nav>
+<div class="container">
 
-<router-outlet></router-outlet>
+
+  <div class="row">
+    <br>
+  </div>
+
+
+  <div class="tab-content" id="pills-tabContent">
+
+    <div class="tab-pane fade" id="homeTab" #pillsHome [ngClass]="isVisible(pillsHome)" role="tabpanel" aria-labelledby="pills-home-tab">
+      <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm-9">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">PQuestion 1</h5>
+              <label for="palindromeInput">See if word is a Palindrome. Please, type the word below to teste it</label>
+              <div class="input-group mb-9" style="max-width: 500px;">
+                <input type="text" id="palindromeInput" class="form-control mw-25" placeholder="Type the word" aria-label="Type the palindrome" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" onclick="onCheck()">Button</button>
+                  <!-- <span class="input-group-text" id="basic-addon2">Palindrome</span> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Answer</h5>
+              <label for="exampleFormControlTextarea1">Example textarea</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm"></div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="profileTab" #profileTab [ngClass]="isVisible(profileTab)" role="tabpanel" aria-labelledby="pills-profile-tab">
+      <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm-9">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Question 2</h5>
+              <label for="palindromeInput">See if word is a Palindrome. Please, type the word below to teste it</label>
+              <div class="input-group mb-9" style="max-width: 500px;">
+                <input type="text" id="palindromeInput2" class="form-control mw-25" placeholder="Type the word" aria-label="Type the palindrome" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" onclick="onCheck()">Button</button>
+                  <!-- <span class="input-group-text" id="basic-addon2">Palindrome</span> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Answer</h5>
+              <label for="exampleFormControlTextarea1">Example textarea</label>
+              <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm"></div>
+      </div>
+    </div>
+  </div>
+
+</div>

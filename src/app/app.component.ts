@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'support-test';
+  tabSelected = 'homeTab';
+
+  isVisible(element: HTMLDivElement) {
+    return element.id === this.tabSelected ? 'show active' : '';
+  }
+
+  isSelected(element: HTMLDivElement) {
+    return element.id === `pills${this.tabSelected}` ? 'active' : '';
+  }
+
+  selectTab(str: string) {
+    this.tabSelected = str;
+  }
 }
