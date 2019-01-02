@@ -52,6 +52,17 @@
             </div>
           </div>
 
+          <br>
+
+          <ul class="list-group">
+            <li class="list-group-item">Users</li>
+            <li *ngFor="let item of displayedList; let i='index'" [ngClass]="isRowEven(i)" class="list-group-item">
+              {{item._id}}   {{item.name}}    {{item.email}}
+            </li>
+          </ul>
+
+          <br>
+
         </div>
         <div class="col-sm"></div>
       </div>
