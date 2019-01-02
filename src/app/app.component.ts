@@ -14,10 +14,13 @@ export class AppComponent {
 
   public displayedList = [];
 
+  public selected = [];
+
   constructor(
     private _listService: ListService,
     private _userService: UserService) {
     this.displayedList = _listService.getFirsts(10, _userService.users);
+    this.selected = [54844];
   }
 
   isVisible(element: HTMLDivElement) {
@@ -29,7 +32,19 @@ export class AppComponent {
   }
 
   isRowEven(index) {
-    return index % 2 === 0 ? 'list-group-item-light' : 'list-group-item-dark';
+    return index % 2 === 0;
+  }
+
+  isRowSelected(id) {
+    return this.selected.indexOf(id) !== -1;
+  }
+
+  selectUserRow(user) {
+    if (this.selected.indexOf(user._id) !== -1) {
+      this.selected = this.selected.filter( id => id !== user._id);
+    } else {
+      this.selected.push(user._id);
+    }
   }
 
   selectTab(str: string) {

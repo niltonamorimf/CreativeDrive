@@ -44,6 +44,21 @@
 
           <br>
 
+          <ul class="list-group">
+            <li class="list-group-item">Users</li>
+            <li *ngFor="let item of displayedList; let i='index'"
+                (click)="selectUserRow(item)"
+                [ngClass]="{'list-group-item-light': isRowEven(i), 'list-group-item-dark': !isRowEven(i), 'active': isRowSelected(item._id)}"
+                class="list-group-item interactive"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Details">
+              {{item._id}}# {{item.name}}
+            </li>
+          </ul>
+
+          <br>
+
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Answer</h5>
@@ -51,15 +66,6 @@
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
           </div>
-
-          <br>
-
-          <ul class="list-group">
-            <li class="list-group-item">Users</li>
-            <li *ngFor="let item of displayedList; let i='index'" [ngClass]="isRowEven(i)" class="list-group-item">
-              {{item._id}}   {{item.name}}    {{item.email}}
-            </li>
-          </ul>
 
           <br>
 
@@ -72,6 +78,7 @@
       <div class="row">
         <div class="col-sm"></div>
         <div class="col-sm-9">
+
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Question 2</h5>
@@ -85,6 +92,9 @@
               </div>
             </div>
           </div>
+
+          <br>
+
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Answer</h5>
@@ -92,6 +102,7 @@
               <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
             </div>
           </div>
+
         </div>
         <div class="col-sm"></div>
       </div>
