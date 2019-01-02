@@ -1,5 +1,10 @@
 # SupportTest
 
+This challange consists in three parts:
+	- in the first the candidate must deploy teh app in developement
+	- than the candidate must examine the work-flow presented, finding errors that may be blocking the processes.
+	- an by last the canditate may fix the code and commit it's resolution.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
 
 ## Development server
