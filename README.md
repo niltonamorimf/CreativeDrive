@@ -5,6 +5,12 @@ This challange consists in three parts:
 	- than the candidate must examine the work-flow presented, finding errors that may be blocking the processes.
 	- an by last the canditate may fix the code and commit it's resolution.
 
+Questions:
+
+	1 - JavaScript object equality
+	2 - For loop and boolean operations
+	3 - function and arrow functions  
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
 
 ## Development server
