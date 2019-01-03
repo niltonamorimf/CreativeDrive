@@ -6,13 +6,13 @@ import { USERS } from './users';
 })
 export class UserService {
 
-  private _users: [any];
+  private _users;
 
   constructor() {
     this._users = USERS;
   }
 
-  public get users(): [any] {
+  public get users() {
     return this._users;
   }
 

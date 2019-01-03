@@ -10,11 +10,13 @@ import { UserService } from './services/user/user.service';
 export class AppComponent {
   public title = 'support-test';
 
-  public tabSelected = 'homeTab';
+  public tabSelected = 'profileTab';
 
   public displayedList: [any];
 
   public selected = [];
+
+  public cardItems = [1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7];
 
   constructor(
     private _listService: ListService,

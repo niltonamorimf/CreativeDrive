@@ -7,7 +7,7 @@ export class ListService {
 
   constructor() { }
 
-  public getFirsts(number, array): [any] {
+  public getFirsts(number, array) {
     return array.slice(0, number);
   }
 }
