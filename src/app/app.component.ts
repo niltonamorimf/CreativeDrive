@@ -12,7 +12,7 @@ export class AppComponent {
 
   public tabSelected = 'homeTab';
 
-  public displayedList = [];
+  public displayedList: [any];
 
   public selected = [];
 
