@@ -21,6 +21,7 @@ export class AppComponent {
     private _userService: UserService) {
     this.displayedList = _listService.getFirsts(10, _userService.users);
     this.selected = [54844];
+
   }
 
   isVisible(element: HTMLDivElement) {
