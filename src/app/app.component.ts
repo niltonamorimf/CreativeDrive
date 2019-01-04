@@ -1,6 +1,7 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { ListService } from './services/list/list.service';
 import { UserService } from './services/user/user.service';
+import { ProductService } from './services/product/product.service';
 
 @Component({
   selector: 'app-root',
@@ -23,19 +24,19 @@ export class AppComponent {
 
   public displayedList: [any];
 
-  public selected = [];
+  public productList = [];
 
-  public cardItems = [1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7];
+  public selected = [];
 
   constructor(
     private _listService: ListService,
-    private _userService: UserService
+    private _userService: UserService,
+    private _producService: ProductService
   ) {
     this.displayedList = _listService.getFirsts(10, _userService.users);
     this.selected = [_listService.getItem((e) => e._id === 54844 , _userService.users)];
-
+    this.productList = _listService.getFirsts(10, _producService.products);
   }
-
 
   isRowEven(index) {
     return index % 2 === 0;
@@ -58,6 +59,14 @@ export class AppComponent {
       this.selected.push(user);
 
     }
+  }
+
+  public onOpenDetail(product) {
+    this.openedItem = product;
+  }
+
+  public onCloseModal(detailModal) {
+    console.log('detailModal:',detailModal)
   }
 
   private removeOpenedItem() {
