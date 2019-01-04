@@ -10,4 +10,8 @@ export class ListService {
   public getFirsts(number, array) {
     return array.slice(0, number);
   }
+
+  public getItem(filter, array) {
+    return array.find(filter);
+  }
 }

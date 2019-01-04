@@ -8,13 +8,6 @@ import { UserService } from './services/user/user.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public title = 'support-test';
-
-  public tabSelected = 'profileTab';
-
-  public displayedList: [any];
-
-  public selected = [];
 
   set openedItem(item: any) {
     this._openedItem = item;
@@ -26,42 +19,45 @@ export class AppComponent {
     return this._openedItem;
   }
 
+  public title = 'support-test';
+
+  public displayedList: [any];
+
+  public selected = [];
+
   public cardItems = [1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7];
 
   constructor(
     private _listService: ListService,
-    private _userService: UserService) {
+    private _userService: UserService
+  ) {
     this.displayedList = _listService.getFirsts(10, _userService.users);
-    this.selected = [54844];
+    this.selected = [_listService.getItem((e) => e._id === 54844 , _userService.users)];
 
   }
 
-  isVisible(element: HTMLDivElement) {
-    return element.id === this.tabSelected ? 'show active' : '';
-  }
-
-  isSelected(element: HTMLDivElement) {
-    return element.id === `pills${this.tabSelected}` ? 'active' : '';
-  }
 
   isRowEven(index) {
     return index % 2 === 0;
   }
 
   isRowSelected(id) {
-    return this.selected.indexOf(id) !== -1;
+    return this.selected.find( (e) => e._id === id);
   }
 
-  selectUserRow(user) {
-    if (this.selected.indexOf(user._id) !== -1) {
-      this.selected = this.selected.filter( id => id !== user._id);
+  selectUserRow(userFromList) {
+
+    const user = {...userFromList};
+
+    if (this.selected.find( u => u === user)) {
+
+      this.selected = this.selected.filter( u => u !== user);
+
     } else {
-      this.selected.push(user._id);
-    }
-  }
 
-  selectTab(str: string) {
-    this.tabSelected = str;
+      this.selected.push(user);
+
+    }
   }
 
   private removeOpenedItem() {
