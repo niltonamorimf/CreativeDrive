@@ -5,10 +5,13 @@
     Analista de Suporte
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link" id="pillshomeTab" (click)="selectTab('homeTab')" #pillsHomeTab data-toggle="pill" href="#pillsHome" [ngClass]="isSelected(pillsHomeTab)" role="tab" aria-controls="pills-home" aria-selected="true">Q1</a>
+        <a class="nav-link active" id="pills-question-one-tab" data-toggle="pill" href="#pills-question-one" role="tab" aria-controls="pills-question-one" aria-selected="true">Q1</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="pillsprofileTab" (click)="selectTab('profileTab')" #pillsProfileTab data-toggle="pill" href="#profileTab" [ngClass]="isSelected(pillsProfileTab)" role="tab" aria-controls="pills-profile" aria-selected="false">Q2</a>
+        <a class="nav-link" id="pills-question-two-tab" data-toggle="pill" href="#pills-question-two" role="tab" aria-controls="pills-question-two" aria-selected="false">Q2</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-question-three-tab" data-toggle="pill" href="#pills-question-three" role="tab" aria-controls="pills-question-three" aria-selected="false">Q3</a>
       </li>
     </ul>
   </a>
@@ -23,11 +26,10 @@
 
   <div class="tab-content" id="pills-tabContent">
 
-    <div class="tab-pane fade" id="homeTab" #pillsHome [ngClass]="isVisible(pillsHome)" role="tabpanel" aria-labelledby="pills-home-tab">
+    <div class="tab-pane show active" id="pills-question-one" role="tabpanel" aria-labelledby="pills-question-one-tab">
       <div class="row">
         <div class="col-sm"></div>
         <div class="col-sm-9">
-
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Question 1</h5>
@@ -74,42 +76,60 @@
       </div>
     </div>
 
-    <div class="tab-pane fade" id="profileTab" #profileTab [ngClass]="isVisible(profileTab)" role="tabpanel" aria-labelledby="pills-profile-tab">
-      <div class="card-columns">
-          <div class="card" *ngFor="let item of cardItems">
-            <div class="card-body">
-              <h5 class="card-title">P card</h5>
-              <label for="palindromeInput">A product</label>
-              <div class="input-group mb-9">
-                <input type="text" id="palindromeInput2" class="form-control mw-25" placeholder="Type the word" aria-label="Type the palindrome" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" onclick="onCheck()">Button</button>
-                  <!-- <span class="input-group-text" id="basic-addon2">Palindrome</span> -->
-                </div>
-              </div>
-            </div>
+    <div class="tab-pane fade" id="pills-question-two" role="tabpanel" aria-labelledby="pills-question-two-tab">
+      <div class="d-flex flex-wrap">
+        <div class="card" *ngFor="let item of cardItems">
+          <div class="card-body">
+            <h5 class="card-title">P card</h5>
+            <label for="card{{item}}" class="d-inline p-2"> A product </label>  
+            <button class="d-inline p-2 btn btn-secondary" type="button" data-toggle="modal" data-target="#detailModal">Button</button>
           </div>
+        </div>
       </div>
+    
 
       <div class="row">
         <div class="col-sm"></div>
-        <div class="col-sm-9">
-          <div class="container">
+          <div class="col-sm-9">
+            <div class="container">
 
-            <br>
+              <br>
 
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Answer</h5>
-                <label for="exampleFormControlTextarea1">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Answer</h5>
+                  <label for="exampleFormControlTextarea1">Example textarea</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
+                </div>
               </div>
             </div>
-
-          </div>
           <div class="col-sm"></div>
         </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="pills-question-three" role="tabpanel" aria-labelledby="pills-question-three-tab">
+      Tab 3
     </div>
   </div>
+</div>
 
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Product Detail #{{openedItem?.id}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{openedItem?.detail}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>

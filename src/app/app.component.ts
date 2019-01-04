@@ -16,6 +16,16 @@ export class AppComponent {
 
   public selected = [];
 
+  set openedItem(item: any) {
+    this._openedItem = item;
+  }
+
+  private _openedItem: any;
+
+  get openedItem(): any {
+    return this._openedItem;
+  }
+
   public cardItems = [1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7];
 
   constructor(
@@ -52,5 +62,9 @@ export class AppComponent {
 
   selectTab(str: string) {
     this.tabSelected = str;
+  }
+
+  private removeOpenedItem() {
+    this.openedItem = null;
   }
 }
