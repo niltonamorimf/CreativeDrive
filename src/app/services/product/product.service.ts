@@ -9,7 +9,7 @@ export class ProductService {
   private _products;
 
   constructor() {
-    this._products = PRODUCTS;
+    this._products = [...PRODUCTS];
   }
 
   public get products() {

@@ -38,6 +38,8 @@ export class AppComponent {
     this.productList = _listService.getFirsts(10, _producService.products);
   }
 
+  // user
+
   isRowEven(index) {
     return index % 2 === 0;
   }
@@ -61,8 +63,28 @@ export class AppComponent {
     }
   }
 
+  // product
+
   public onOpenDetail(product) {
+
     this.openedItem = product;
+
+  }
+
+  public isQuoteValid(quote) {
+
+    if (quote.price > 0 && quote.type !== 'QUALITY_ASSURANCE') {
+
+      return true;
+
+    } else if (quote.price >= 0 && quote.type === 'QUALITY_ASSURANCE') {
+
+      return true;
+
+    }
+
+    return false;
+
   }
 
   public onCloseModal(detailModal) {

@@ -11,10 +11,6 @@ export const PRODUCTS = [
       {
         'type' : 'POST_PRODUCTION',
         'price' : 819.0
-      },
-      {
-        'type' : 'QUALITY_ASSURANCE',
-        'price' : 642.0
       }
     ]
   },

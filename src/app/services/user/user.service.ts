@@ -9,7 +9,7 @@ export class UserService {
   private _users;
 
   constructor() {
-    this._users = USERS;
+    this._users = [...USERS];
   }
 
   public get users() {
