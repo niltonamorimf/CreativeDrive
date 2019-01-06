@@ -35,7 +35,7 @@ export class AppComponent {
   ) {
     this.displayedList = _listService.getFirsts(10, _userService.users);
     this.selected = [_listService.getItem((e) => e._id === 54844 , _userService.users)];
-    this.productList = _listService.getFirsts(10, _producService.products);
+    this.fetchFirstsProducts();
   }
 
   // user
@@ -65,9 +65,15 @@ export class AppComponent {
 
   // product
 
+  public fetchFirstsProducts() {
+
+    this.productList = this._listService.getFirsts(10, this._producService.products);
+
+  }
+
   public onOpenDetail(product) {
 
-    this.openedItem = {...product};
+    this.openedItem = this._producService.getProduct(product.sku);
 
   }
 
@@ -75,7 +81,13 @@ export class AppComponent {
 
     if (this.validateProduct(product)) {
 
-      this._producService.saveProduct(product);
+      const savedProduct = this._producService.saveProduct(product);
+
+      if (savedProduct) {
+
+        this.fetchFirstsProducts();
+
+      }
 
     }
 

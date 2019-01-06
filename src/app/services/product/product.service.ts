@@ -9,7 +9,7 @@ export class ProductService {
   private _products;
 
   constructor() {
-    this._products = [...PRODUCTS];
+    this._products = this.newProductsRef(PRODUCTS);
   }
 
   public get products() {
@@ -17,10 +17,19 @@ export class ProductService {
   }
 
   public saveProduct(product) {
-    this._products.forEach( p => {
-       if (p._id === product._id) {
-        p = product;
+    return this._products.find( (p, index, arr) => {
+       if (p.sku === product.sku) {
+        arr[index] = product;
        }
+       return p.sku === product.sku;
     });
+  }
+
+  public getProduct(sku) {
+    return this.newProductsRef(this._products.find( p => p.sku === sku));
+  }
+
+  public newProductsRef(object) {
+    return JSON.parse(JSON.stringify(object));
   }
 }
