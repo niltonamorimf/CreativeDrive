@@ -24,9 +24,12 @@ export class AppComponent {
 
   public displayedList: [any];
 
+  public selected = [];
+
   public productList = [];
 
-  public selected = [];
+  public selectedProducts = [];
+
 
   constructor(
     private _listService: ListService,
@@ -41,11 +44,15 @@ export class AppComponent {
   // user
 
   isRowEven(index) {
+
     return index % 2 === 0;
+
   }
 
   isRowSelected(id) {
+
     return this.selected.find( (e) => e._id === id);
+
   }
 
   selectUserRow(userFromList) {
@@ -77,17 +84,13 @@ export class AppComponent {
 
   }
 
-  onSaveProduct(product) {
+  onSaveQuotes(product) {
 
-    if (this.validateProduct(product)) {
+    const savedProduct = this._producService.saveQuotes(product);
 
-      const savedProduct = this._producService.saveProduct(product);
+    if (savedProduct) {
 
-      if (savedProduct) {
-
-        this.fetchFirstsProducts();
-
-      }
+      this.fetchFirstsProducts();
 
     }
 
@@ -115,11 +118,28 @@ export class AppComponent {
 
   }
 
-  public onCloseModal(detailModal) {
-    console.log('detailModal:',detailModal)
+  public selectProduct(sku) {
+
+    if (this.selectedProducts.indexOf(sku) < 0) {
+
+      this.selectedProducts.push(sku);
+
+    } else {
+
+      this.selectedProducts = this.selectedProducts.filter( s => s !== sku);
+
+    }
   }
 
-  private removeOpenedItem() {
-    this.openedItem = null;
+  public onSubmitProducts() {
+
+    const productsSybmitted = this._producService.chargeProducts(this.selectedProducts);
+
+    if (productsSybmitted.length !== 0) {
+
+      this.selectedProducts = [];
+
+    }
+
   }
 }

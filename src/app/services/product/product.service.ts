@@ -25,6 +25,19 @@ export class ProductService {
     });
   }
 
+  public saveQuotes({sku, quotes}) {
+    return this._products.find( (p, index, arr) => {
+      if (p.sku === sku) {
+       arr[index].quotes = quotes;
+      }
+      return p.sku === sku;
+   });
+  }
+
+  public chargeProducts(skuList) {
+    return skuList;
+  }
+
   public getProduct(sku) {
     return this.newProductsRef(this._products.find( p => p.sku === sku));
   }
