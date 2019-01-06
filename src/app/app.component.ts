@@ -67,7 +67,23 @@ export class AppComponent {
 
   public onOpenDetail(product) {
 
-    this.openedItem = product;
+    this.openedItem = {...product};
+
+  }
+
+  onSaveProduct(product) {
+
+    if (this.validateProduct(product)) {
+
+      this._producService.saveProduct(product);
+
+    }
+
+  }
+
+  public validateProduct(product) {
+
+    return product.quotes.filter( q => this.isQuoteValid(q)).length === product.quotes.length;
 
   }
 

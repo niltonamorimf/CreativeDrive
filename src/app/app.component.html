@@ -37,7 +37,6 @@
                 <input type="text" id="palindromeInput" class="form-control mw-25" placeholder="Type the word" aria-label="Type the palindrome" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary" type="button" onclick="onCheck()">Button</button>
-                  <!-- <span class="input-group-text" id="basic-addon2">Palindrome</span> -->
                 </div>
               </div>
             </div>
@@ -53,7 +52,7 @@
                 class="list-group-item interactive"
                 data-toggle="tooltip"
                 data-placement="top"
-                title="Details">
+                [title]="!isRowSelected(item._id) ? 'Add user' : 'Remove User'">
               {{item._id}}# {{item.name}}
             </li>
           </ul>
@@ -77,11 +76,32 @@
 
     <div class="tab-pane fade" id="pills-question-two" role="tabpanel" aria-labelledby="pills-question-two-tab">
       <div class="d-flex flex-wrap">
-        <div class="card" *ngFor="let product of productList">
+        <div class="card product-card" *ngFor="let product of productList">
           <div class="card-body">
             <h5 class="card-title">{{product?.sku}}</h5>
-            <div class="card-text"> {{product?.name}} </div>
-            <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#detailModal" (click)="onOpenDetail(product)">Button</button>
+            <p class="card-text"> {{product?.name}} </p>
+            <div class="card-info d-flex justify-content-between">
+              <ul class="list-group">
+                <li *ngFor="let quote of product?.quotes"
+                  class="badge badge-pill card-badge"
+                  [ngClass]="{'badge-info': isQuoteValid(quote), 'badge-light' : !isQuoteValid(quote)}"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  [title]="isQuoteValid(quote) ? 'Quote Valid' : 'Quote Invalid'">
+                  <ng-template
+                    [ngTemplateOutlet]="cardQuotTip"
+                    [ngTemplateOutletContext]="{$implicit: quote.type}">
+                  </ng-template>
+                </li>
+              </ul>
+              <div class="d-flex align-items-end">
+                <button class="btn btn-secondary"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#detailModal"
+                  (click)="onOpenDetail(product)">Open detail</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -143,8 +163,6 @@
                           <span class="input-group-text">.00</span>
                         </div>
                       </div>
-                      <!-- <label class="sr-only" for="input{{quote.type}}">Name</label> -->
-                      <!-- <input type="text" class="form-control" id="input{{quote.type}}" placeholder="Quote value"> -->
                     </div>
                   <div class="col-auto my-1">
                     <div class="custom-control custom-checkbox mr-sm-2">
@@ -159,9 +177,15 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onSaveProduct(openedItem)">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #cardQuotTip let-type>
+  <ng-container *ngIf="type === 'MODELING'">MODEL</ng-container>
+  <ng-container *ngIf="type === 'POST_PRODUCTION'">POST</ng-container>
+  <ng-container *ngIf="type === 'QUALITY_ASSURANCE'"> QA </ng-container>
+</ng-template>

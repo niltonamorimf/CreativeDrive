@@ -3,5 +3,23 @@
 }
 
 .card {
-    margin: 8px;
+    &.product-card {
+        margin: 8px;
+        width: 220px;
+
+        .card-text {
+            min-height: 3.0em;
+        }
+    }
+
+    .card-badge {
+        padding-bottom: 4px;
+        margin-bottom: 4px;
+        padding-top: 4px;
+    }
+
+    .card-info {
+        height: 68px;
+    }
 }
+

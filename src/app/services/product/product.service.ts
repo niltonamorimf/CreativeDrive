@@ -15,4 +15,12 @@ export class ProductService {
   public get products() {
     return this._products;
   }
+
+  public saveProduct(product) {
+    this._products.forEach( p => {
+       if (p._id === product._id) {
+        p = product;
+       }
+    });
+  }
 }
