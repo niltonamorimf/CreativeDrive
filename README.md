@@ -1,9 +1,26 @@
 # SupportTest
+O teste consiste em uma simulação de atendimento a suporte. Será passado chamados de suporte dos mais variados níveis de complexidade. Estes irão simular problemas encontrados por usuários da aplicação. As respostar desses chamados deveram conter pelo menos uma das seguintes informações:
+ 
+ - Uma análise inicial, com a finalidade de enriquecer o chamado de suporte,uma análise mais de fluxo de trabalho e não necessáriamente técnica;*
+ - Uma análise técnica, com a finalidade de obter dados mais precisos sobre o erro, podendo indicar o motivo do erro e até indicar uma solução;*
+ - Ou uma correção do problema, com a finalidade de corrigir o erro antes de passar para uma equipe de desenvolvimento.**
+ 
+## Pré Requisitos:
 
-This challange consists in three parts:
-	- in the first the candidate must deploy teh app in developement
-	- than the candidate must examine the work-flow presented, finding errors that may be blocking the processes.
-	- an by last the canditate may fix the code and commit it's resolution.
+ - Um computador com Node.js, NPM e git instalados;
+ - Conexação de internet;
+ - Navegador Google Chrome;
+ - Editor de Texto como o Sublime (de preferencia o VisualCode);
+ - conta no gitHub.
+
+## Requisitos:
+
+ - Clonar o repositório;
+ - Subir a aplicação no browser;
+ - seguir o fluxo descrito descrito nos suportes;
+ - Reescreva este arquivo, o README.md, com as respostas;
+ - Publique o projeto, com o arquivo README.md modificado, e com qualquer alteração que tenha sido feita.
+
 
 Questions:
 
