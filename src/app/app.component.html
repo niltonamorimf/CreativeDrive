@@ -1,171 +1,32 @@
 <nav class="navbar navbar-dark bg-dark">
   <!-- Navbar content -->
   <a class="navbar-brand  mb-0 h1" href="#">
-    Analista de Suporte
+    <div class="p-4">
+      <h4>Teste de Análise de Suporte</h4>
+      <span class="text-muted">Depuração de gerenciadores de usuários e produtos</span>
+    </div>
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="pills-question-one-tab" data-toggle="pill" href="#pills-question-one" role="tab" aria-controls="pills-question-one" aria-selected="true">Q1</a>
+        <a class="nav-link active" id="pills-question-one-tab" data-toggle="pill" href="#pills-question-one" role="tab" aria-controls="pills-question-one" aria-selected="true">
+          Usuários
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="pills-question-two-tab" data-toggle="pill" href="#pills-question-two" role="tab" aria-controls="pills-question-two" aria-selected="false">Q2</a>
+        <a class="nav-link" id="pills-question-two-tab" data-toggle="pill" href="#pills-question-two" role="tab" aria-controls="pills-question-two" aria-selected="false">
+          Produtos
+        </a>
       </li>
-      <!--<li class="nav-item">-->
-        <!--<a class="nav-link" id="pills-question-three-tab" data-toggle="pill" href="#pills-question-three" role="tab" aria-controls="pills-question-three" aria-selected="false">Q3</a>-->
-      <!--</li>-->
     </ul>
   </a>
 </nav>
+
 <div class="container">
-
-
-  <div class="row">
-    <br>
-  </div>
-
-
   <div class="tab-content" id="pills-tabContent">
-
     <div class="tab-pane show active" id="pills-question-one" role="tabpanel" aria-labelledby="pills-question-one-tab">
       <app-user-component-q1></app-user-component-q1>
     </div>
-
     <div class="tab-pane fade" id="pills-question-two" role="tabpanel" aria-labelledby="pills-question-two-tab">
-      <div *ngIf="selectedProducts.length !== 0" class="card">
-        <div class="card-body d-flex justify-content-between">
-          <span>{{selectedProducts.length}} product{{selectedProducts.length === 1 ? '' : 's'}} selected </span>
-          <button class="btn btn-info" type="button" (click)="onSubmitProducts()">
-              Submit Products
-            </button>
-        </div>
-      </div>
-      <div class="d-flex flex-wrap">
-        <div class="card product-card" *ngFor="let product of productList">
-          <div class="card-body">
-            <h5 class="card-title d-flex justify-content-between">
-              {{product?.sku}}
-              <div *ngIf="validateProduct(product)" class="col-auto my-1">
-                <div class="custom-control product-info-check-box custom-checkbox mr-sm-2">
-                  <input type="checkbox" [checked]="selectedProducts.indexOf(product.sku) !== -1" class="custom-control-input" (click)="selectProduct(product.sku)" id="checkBoxValid{{product.sku}}" name="cbV{{product?.sku}}">
-                  <label class="custom-control-label" for="checkBoxValid{{product.sku}}">
-                    {{selectedProducts.indexOf(product.sku) !== -1 ? 'Selected' : 'Select'}}</label>
-                </div>
-              </div>
-            </h5>
-            <p class="card-text"> {{product?.name}} </p>
-            <div class="card-info d-flex justify-content-between">
-              <ul class="list-group">
-                <li *ngFor="let quote of product?.quotes"
-                  class="badge badge-pill card-badge"
-                  [ngClass]="{'badge-info': isQuoteValid(quote), 'badge-light' : !isQuoteValid(quote)}"
-                  data-toggle="tooltip"
-                  data-placement="top"
-                  [title]="isQuoteValid(quote) ? 'Quote Valid' : 'Quote Invalid'">
-                  <ng-template
-                    [ngTemplateOutlet]="cardQuotTip"
-                    [ngTemplateOutletContext]="{$implicit: quote.type}">
-                  </ng-template>
-                </li>
-              </ul>
-              <div class="d-flex align-items-end">
-                <button class="btn btn-secondary"
-                  type="button"
-                  data-toggle="modal"
-                  data-target="#detailModal"
-                  (click)="onOpenDetail(product)">Open detail</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm"></div>
-          <div class="col-sm-9">
-            <div class="container">
-
-              <br>
-
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Answer</h5>
-                  <label for="exampleFormControlTextarea2">Example textarea</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
-                </div>
-              </div>
-            </div>
-          <div class="col-sm"></div>
-        </div>
-      </div>
-    </div>
-
-    <!--<div class="tab-pane fade" id="pills-question-three" role="tabpanel" aria-labelledby="pills-question-three-tab">-->
-      <!--<div class="card">-->
-        <!--<div class="card-body">-->
-          <!--<h5 class="card-title">Question 1</h5>-->
-          <!--<p class="card-text">About this request</p>-->
-          <!--<button class="btn btn-outline-secondary" type="button" onclick="onCheck()">Button</button>-->
-        <!--</div>-->
-      <!--</div>-->
-
-
-
-
-    <!--</div>-->
-  </div>
-</div>
-
-<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Product Detail #{{openedItem?.sku}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {{openedItem?.name}}
-        <br>
-        <br>
-        <div class="list-group list-group-flush">
-          <form #data="ngForm">
-            <ng-container *ngFor="let quote of openedItem?.quotes">
-              <a class="list-group-item">
-                {{quote?.type}}
-                <div class="form-row align-items-center justify-content-between">
-                  <div class="col-auto my-1">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
-                      </div>
-                      <input type="number" [(ngModel)]="quote.price" class="form-control" aria-label="Amount (to the nearest dollar)" name="price{{quote.type}}">
-                      <div class="input-group-append">
-                        <span class="input-group-text">.00</span>
-                      </div>
-                    </div>
-                    </div>
-                  <div class="col-auto my-1">
-                    <div class="custom-control custom-checkbox mr-sm-2">
-                      <input type="checkbox" [checked]="isQuoteValid(quote)" disabled class="custom-control-input" id="checkBox{{quote.type}}" name="cb{{quote.type}}">
-                      <label class="custom-control-label" for="checkBox{{quote.type}}">Verify</label>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </ng-container>
-          </form>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSaveQuotes(openedItem)">Save changes</button>
-      </div>
+      <app-product-component-q2></app-product-component-q2>
     </div>
   </div>
 </div>
-
-<ng-template #cardQuotTip let-type>
-  <ng-container *ngIf="type === 'MODELING'">MODEL</ng-container>
-  <ng-container *ngIf="type === 'POST_PRODUCTION'">POST</ng-container>
-  <ng-container *ngIf="type === 'QUALITY_ASSURANCE'"> QA </ng-container>
-</ng-template>
