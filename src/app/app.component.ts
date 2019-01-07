@@ -34,7 +34,7 @@ export class AppComponent {
   constructor(
     private _listService: ListService,
     private _userService: UserService,
-    private _producService: ProductService
+    private _productService: ProductService
   ) {
     this.displayedList = _listService.getFirsts(10, _userService.users);
     this.selected = [_listService.getItem((e) => e._id === 54844 , _userService.users)];
@@ -74,9 +74,11 @@ export class AppComponent {
 
   public fetchFirstsProducts() {
 
-    this._producService.products.subscribe( res => {
+    this._productService.products
 
-       this.productList = this._listService.getFirsts(10, res);
+      .subscribe( res => {
+
+        this.productList = this._listService.getFirsts(10, res);
 
     });
 
@@ -84,13 +86,21 @@ export class AppComponent {
 
   public onOpenDetail(product) {
 
-    this.openedItem = this._producService.getProduct(product.sku);
+    this._productService.getProduct(product.sku)
+
+      .subscribe(
+
+        res => this.openedItem = res,
+
+        err => console.log('error', err)
+
+      );
 
   }
 
   onSaveQuotes(product) {
 
-    this._producService.saveQuotes(product)
+    this._productService.saveQuotes(product)
 
       .subscribe(
 
@@ -103,7 +113,8 @@ export class AppComponent {
 
   public validateProduct(product) {
 
-    return product.quotes.filter( q => this.isQuoteValid(q)).length === product.quotes.length;
+
+    return product && product.quotes.filter( q => this.isQuoteValid(q)).length === product.quotes.length;
 
   }
 
@@ -138,13 +149,21 @@ export class AppComponent {
 
   public onSubmitProducts() {
 
-    const productsSybmitted = this._producService.chargeProducts(this.selectedProducts);
+    this._productService.chargeProducts(this.selectedProducts)
 
-    if (productsSybmitted.length !== 0) {
+      .subscribe( res => {
 
-      this.selectedProducts = [];
+        if (res && res.success) {
 
-    }
+          this.selectedProducts = [];
+
+        } else {
+
+          console.error('error');
+
+        }
+
+      });
 
   }
 }

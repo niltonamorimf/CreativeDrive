@@ -11,7 +11,8 @@ export class ApiService {
   constructor(private _http: HttpClient) { }
 
   public get(url, options?): Observable<any>  {
-    return this._http.get(this.getBaseUrl(url), this.buildOption(options));
+    const params = this.buildOption(options);
+    return this._http.get(this.getBaseUrl(url), params);
   }
 
   public post(url, body, options?): Observable<any>  {
