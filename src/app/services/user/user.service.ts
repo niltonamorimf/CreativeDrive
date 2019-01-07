@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { USERS } from './users';
+import { ApiService } from '../api/api.service';
+import { map } from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ export class UserService {
 
   private _users;
 
-  constructor() {
+  constructor(private _api: ApiService) {
     this._users = [...USERS];
   }
 
@@ -16,7 +18,8 @@ export class UserService {
     return this._users;
   }
 
-  public findUser(id): any {
-    return this._users.filter( u => u._id === id);
+  public getUser(id): any {
+    return this._api.get('getUser', {id: id})
+      .pipe(map(res => this._users.find( u => u._id === parseInt(res.id, 0))));
   }
 }

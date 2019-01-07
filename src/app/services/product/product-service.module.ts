@@ -11,4 +11,4 @@ import { ApiModule } from '../api/api.module';
   ],
   providers: [ProductService]
 })
-export class ProductModule { }
+export class ProductServiceModule { }

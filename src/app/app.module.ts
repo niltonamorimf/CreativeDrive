@@ -5,8 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListModule } from './services/list/list.module';
-import { UserModule } from './services/user/user.module';
-import { ProductModule } from './services/product/product.module';
+import { UserServiceModule } from './services/user/user-service.module';
+import { ProductServiceModule } from './services/product/product-service.module';
+import { UserModule } from './components/user/user.module';
 
 @NgModule({
   declarations: [
@@ -15,10 +16,11 @@ import { ProductModule } from './services/product/product.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    UserModule,
     FormsModule,
     ListModule,
-    UserModule,
-    ProductModule
+    UserServiceModule,
+    ProductServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]

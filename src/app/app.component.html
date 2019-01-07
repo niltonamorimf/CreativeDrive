@@ -26,52 +26,7 @@
   <div class="tab-content" id="pills-tabContent">
 
     <div class="tab-pane show active" id="pills-question-one" role="tabpanel" aria-labelledby="pills-question-one-tab">
-      <div class="row">
-        <div class="col-sm"></div>
-        <div class="col-sm-9">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Question 1</h5>
-              <label for="palindromeInput">See if word is a Palindrome. Please, type the word below to teste it</label>
-              <div class="input-group mb-9" style="max-width: 500px;">
-                <input type="text" id="palindromeInput" class="form-control mw-25" placeholder="Type the word" aria-label="Type the palindrome" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" onclick="onCheck()">Button</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <br>
-
-          <ul class="list-group">
-            <li class="list-group-item">Users</li>
-            <li *ngFor="let item of displayedList; let i='index'"
-                (click)="selectUserRow(item)"
-                [ngClass]="{'list-group-item-light': isRowEven(i), 'list-group-item-dark': !isRowEven(i), 'active': isRowSelected(item._id)}"
-                class="list-group-item interactive"
-                data-toggle="tooltip"
-                data-placement="top"
-                [title]="!isRowSelected(item._id) ? 'Add user' : 'Remove User'">
-              {{item._id}}# {{item.name}}
-            </li>
-          </ul>
-
-          <br>
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Answer</h5>
-              <label for="exampleFormControlTextarea1">Example textarea</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-          </div>
-
-          <br>
-
-        </div>
-        <div class="col-sm"></div>
-      </div>
+      <app-user-component-q1></app-user-component-q1>
     </div>
 
     <div class="tab-pane fade" id="pills-question-two" role="tabpanel" aria-labelledby="pills-question-two-tab">
@@ -83,8 +38,6 @@
             </button>
         </div>
       </div>
-
-
       <div class="d-flex flex-wrap">
         <div class="card product-card" *ngFor="let product of productList">
           <div class="card-body">
@@ -125,7 +78,6 @@
         </div>
       </div>
 
-
       <div class="row">
         <div class="col-sm"></div>
           <div class="col-sm-9">
@@ -136,7 +88,7 @@
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Answer</h5>
-                  <label for="exampleFormControlTextarea1">Example textarea</label>
+                  <label for="exampleFormControlTextarea2">Example textarea</label>
                   <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
                 </div>
               </div>
@@ -161,7 +113,6 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
       <div class="modal-body">
         {{openedItem?.name}}
         <br>
@@ -173,15 +124,15 @@
                 {{quote?.type}}
                 <div class="form-row align-items-center justify-content-between">
                   <div class="col-auto my-1">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">$</span>
-                        </div>
-                        <input type="number" [(ngModel)]="quote.price" class="form-control" aria-label="Amount (to the nearest dollar)" name="price{{quote.type}}">
-                        <div class="input-group-append">
-                          <span class="input-group-text">.00</span>
-                        </div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
                       </div>
+                      <input type="number" [(ngModel)]="quote.price" class="form-control" aria-label="Amount (to the nearest dollar)" name="price{{quote.type}}">
+                      <div class="input-group-append">
+                        <span class="input-group-text">.00</span>
+                      </div>
+                    </div>
                     </div>
                   <div class="col-auto my-1">
                     <div class="custom-control custom-checkbox mr-sm-2">

@@ -24,7 +24,7 @@ export class ApiService {
     return `${environment.api}${url}`;
   }
 
-  private buildOption(options): {params} {
+  private buildOption(options): any {
     let params = new HttpParams();
     for (const prop in options) {
       if (options[prop]) {
