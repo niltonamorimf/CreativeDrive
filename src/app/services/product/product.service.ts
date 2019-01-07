@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PRODUCTS } from './products';
 import { ApiService } from '../api/api.service';
+import { map } from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,28 +15,39 @@ export class ProductService {
   }
 
   public get products() {
-    this._api.get('getProductList').subscribe( x => console.log(x, 'response: getProductList'));
-    return this._products;
+    return this._api.get('getProductList')
+      .pipe(map((res => {
+        res = this._products;
+        return res;
+      }))
+    );
   }
 
   public saveProduct(product) {
-    this._api.post('saveProduct', {product: product}).subscribe( x => console.log(x, 'response: saveProduct'));
-    return this._products.find( (p, index, arr) => {
-       if (p.sku === product.sku) {
-        arr[index] = product;
-       }
-       return p.sku === product.sku;
-    });
+    return this._api.post('saveProduct', {product: product})
+      .pipe( map((res) => {
+        this._products.forEach( (p, index, arr) => {
+          if (p.sku === product.sku) {
+            arr[index] = product;
+          }
+          return p.sku === product.sku;
+        });
+    }));
   }
 
   public saveQuotes({sku, quotes}) {
-    this._api.post('saveProducQuotes', {quotes: quotes, sku: sku}).subscribe( x => console.log(x, 'response: saveProducQuotes'));
-    return this._products.find( (p, index, arr) => {
-      if (p.sku === sku) {
-       arr[index].quotes = quotes;
-      }
-      return p.sku === sku;
-   });
+    let body = {};
+    quotes.forEach( (quote) => body = {...body, [quote.type]: quote.price});
+
+    return this._api.post('saveProducQuotes', body, {sku: sku})
+      .pipe( map( (res) => {
+        this._products.forEach( (p, index, arr) => {
+          if (p.sku === res.sku) {
+            arr[index].quotes = res.quotes;
+          }
+        });
+        return res;
+      }));
   }
 
   public chargeProducts(skuList) {

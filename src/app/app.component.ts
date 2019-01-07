@@ -74,7 +74,11 @@ export class AppComponent {
 
   public fetchFirstsProducts() {
 
-    this.productList = this._listService.getFirsts(10, this._producService.products);
+    this._producService.products.subscribe( res => {
+
+       this.productList = this._listService.getFirsts(10, res);
+
+    });
 
   }
 
@@ -86,14 +90,15 @@ export class AppComponent {
 
   onSaveQuotes(product) {
 
-    const savedProduct = this._producService.saveQuotes(product);
+    this._producService.saveQuotes(product)
 
-    if (savedProduct) {
+      .subscribe(
 
-      this.fetchFirstsProducts();
+        res => this.fetchFirstsProducts(),
 
-    }
+        err => console.error('error: ', err)
 
+      );
   }
 
   public validateProduct(product) {
