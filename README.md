@@ -1,54 +1,49 @@
-# SupportTest
-O teste consiste em uma simulação de atendimento a suporte. Será passado chamados de suporte dos mais variados níveis de complexidade. Estes irão simular problemas encontrados por usuários da aplicação. As respostar desses chamados deveram conter pelo menos uma das seguintes informações:
+# Teste de Análise de Suporte
+O teste consiste em uma simulação de atendimento a suporte de uma aplicação de FRONT-END em Angular 7. São cinco questões, estas irão simular problemas encontrados por usuários desta aplicação. As respostas desses chamados devem ser respondidas neste documento abaixo no tópico 'Respostas', e devem conter os seguintes itens*:
  
- - Uma análise inicial, com a finalidade de enriquecer o chamado de suporte,uma análise mais de fluxo de trabalho e não necessáriamente técnica;*
- - Uma análise técnica, com a finalidade de obter dados mais precisos sobre o erro, podendo indicar o motivo do erro e até indicar uma solução;*
- - Ou uma correção do problema, com a finalidade de corrigir o erro antes de passar para uma equipe de desenvolvimento.**
- 
+ - Uma análise inicial, com a finalidade de enriquecer o chamado de suporte. Essa sendo uma análise mais de fluxo de trabalho e não necessariamente técnica;
+ - Uma análise técnica, com a finalidade de obter dados mais precisos sobre o erro, podendo indicar o motivo do erro e até indicar uma solução;
+ - Uma correção do problema, com a finalidade de corrigir o erro antes de passar para uma equipe de desenvolvimento.
+ - Uma mensagem para o usuário que registrou o suporte, explicando o que será feito.
+
+ * A resposta pode ser parcial, mas deve conter pelo menos o primeiro e o ultimo item.
+
 ## Pré Requisitos:
 
  - Um computador com Node.js, NPM e git instalados;
- - Conexação de internet;
+ - Conexão de internet;
  - Navegador Google Chrome;
- - Editor de Texto como o Sublime (de preferencia o VisualCode);
- - conta no gitHub.
+ - Editor de texto de sua preferência. Como o Sublime, VisualCode, etc;
+ - Conta no gitHub.
 
-## Requisitos:
+## Procedimentos:
 
- - Clonar o repositório;
- - Subir a aplicação no browser;
- - seguir o fluxo descrito descrito nos suportes;
+ - Clonar o repositório encontrado em 'https://github.com/CarlosEduardoFerreiraRamos/support-test-cora';
+ - Baixar os pacotes da aplicação com NPM;
+ - Subir a aplicação no browser com NPM ou com angular-CLI;
+ - Seguir o fluxo descrito descrito nos suportes;
  - Reescreva este arquivo, o README.md, com as respostas;
- - Publique o projeto, com o arquivo README.md modificado, e com qualquer alteração que tenha sido feita.
+ - Publique o projeto em seu repositório no gitHub, com o arquivo README.md modificado, e com qualquer alteração que tenha sido feita.
 
-Content:
+## Questões
 
-	1 - JavaScript object equality
-	2 - For loop and boolean operations
-	3 - function and arrow functions  
+  Aba de gerenciamento de usuários
+   
+   1 - Não é possível desselecionar usuários selecionados:
+   - Após selecionar um usuário não tem como retirar a seleção, ele ainda fica marcada em azul mesmo depois de clicar nele;
+   
+   2 - Ao se clicar em detalhes aciona a seleção de usuário:
+   - Se clico no detalhes de um usuário que não está selecionado ele acaba ficando selecionado;
+   
+   3 - Detalhes do usuário quebrado:
+   - Ela abre em branco, sem valor, quebra.
+   
+  Aba de gerenciamento de produtos:
+  
+   4 - Produtos com três quotes, a última não valida caso seja validada com valor Zero:
+   - Não estou conseguindo mandar a cobrança do produto com sku 'LIB1432', ele não está registrando a quote QA.  
+   
+   5 - Produto que é desvalidado após ser selecionado ainda é enviado no submit:
+   - Selecionei alguns produtos no checkbox do lado do 'select', depois tive que remover o valor da quote de um produto específico e desvalida-lo, mas a contagem de produtos para cobrança ainda estava considerando esse produto.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Respostas
