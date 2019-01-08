@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-sm"></div>
+  <div class="col-sm-9">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Página de Gerenciamento de usuário</h5>
+        <div class="card-text">
+          <p>
+            Nesta tela pode-se selecionar usuários que receberão a permissão de admin.
+            O fluxo seria só clicar na linha para adicionar um usuário.
+            Também é possível acessar os detalhes do usuário no icone mais a direita da linha.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <ul class="list-group">
+      <li class="list-group-item">Users</li>
+      <li *ngFor="let user of displayedList; let i='index'"
+          (click)="selectUserRow(user)"
+          [ngClass]="{'list-group-item-light': isRowEven(i), 'list-group-item-dark': !isRowEven(i), 'active': isRowSelected(user._id)}"
+          class="list-group-item interactive"
+          data-toggle="tooltip"
+          data-placement="top"
+          [title]="!isRowSelected(user._id) ? 'Add user' : 'Remove User'">
+        <div class="form-row align-items-center justify-content-between">
+          <div>
+            {{user._id}}# {{user.name}}
+          </div>
+          <div data-toggle="tooltip"
+            data-placement="top"
+            title="Detail">
+            <fa name="edit"
+              data-toggle="modal"
+              data-target="#userModal"
+              (click)="onOpenUserDetail()">
+            </fa>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <br>
+  </div>
+  <div class="col-sm"></div>
+</div>
+
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> #{{ selectedUser?._id }} - {{selectedUser?.name}}</h5>
+      </div>
+      <div class="modal-body">
+        <div class="list-group list-group-flush">
+          <a class="list-group-item">{{selectedUser?.email}}</a>
+          <a class="list-group-item">{{selectedUser?.role}}</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

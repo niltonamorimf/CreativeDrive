@@ -1,0 +1,130 @@
+<div class="row">
+  <div class="col-sm"></div>
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Página de Gerenciamento de produto</h5>
+        <div class="card-text">
+          <p>
+            Nesta tela pode-se selecionar produtos váidos a serem cobrados.
+            Os produtos precisam estar com todas as quotes com valor para serem considerados válidos.
+            O preenchimento das quotes é feito no detalhe de cada produto, acessado no icone de detalhes.
+          </p>
+          <p>As duas primeiras quotes precisam apresentar um valor acima de 0 para serem validas</p>
+          <p>A ultima quote pode apresentar um valor acima ou igual a 0 para ser valida</p>
+        </div>
+      </div>
+    </div>
+  
+
+<div *ngIf="selectedProducts.length !== 0" class="card">
+  <div class="card-body d-flex justify-content-between">
+    <span>{{selectedProducts.length}} product{{selectedProducts.length === 1 ? '' : 's'}} selected </span>
+    <button class="btn btn-info" type="button" (click)="onSubmitProducts()">
+        Submit Products
+      </button>
+  </div>
+</div>
+<div class="d-flex flex-wrap">
+  <div class="card product-card" *ngFor="let product of productList">
+    <div class="card-body">
+      <div class="card-title d-flex justify-content-between">
+        <h5>{{product?.sku}}</h5>
+        <div *ngIf="validateProduct(product)" class="col-auto my-1">
+          <div class="custom-control selection-item product-info-check-box custom-checkbox mr-sm-2">
+            <input type="checkbox" class="" [checked]="selectedProducts.indexOf(product.sku) !== -1" class="custom-control-input" (click)="selectProduct(product.sku)" id="checkBoxValid{{product.sku}}" name="cbV{{product?.sku}}">
+            <label class="custom-control-label" for="checkBoxValid{{product.sku}}">
+              {{selectedProducts.indexOf(product.sku) !== -1 ? 'Selected' : 'Select'}}</label>
+          </div>
+        </div>
+      </div>
+      <p class="card-text"> {{product?.name}} </p>
+      <div class="card-info d-flex justify-content-between">
+        <ul class="list-group">
+          <li *ngFor="let quote of product?.quotes"
+            class="badge badge-pill card-badge"
+            [ngClass]="{'badge-info': isQuoteValid(quote), 'badge-light' : !isQuoteValid(quote)}"
+            data-toggle="tooltip"
+            data-placement="top"
+            [title]="isQuoteValid(quote) ? 'Quote Valid' : 'Quote Invalid'">
+            <ng-template
+              [ngTemplateOutlet]="cardQuotTip"
+              [ngTemplateOutletContext]="{$implicit: quote.type}">
+            </ng-template>
+          </li>
+        </ul>
+        <div class="d-flex align-items-end"
+        data-toggle="tooltip"
+        data-placement="top"
+        [title]="'Detail'">
+          <fa name="edit"
+            class="detail-product-icon"
+            data-toggle="modal"
+            data-target="#detailModal"
+            (click)="onOpenDetail(product)">
+          </fa>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Product Detail #{{openedItem?.sku}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{openedItem?.name}}
+        <br>
+        <br>
+        <div class="list-group list-group-flush">
+          <form #data="ngForm">
+            <ng-container *ngFor="let quote of openedItem?.quotes">
+              <a class="list-group-item">
+                {{quote?.type}}
+                <div class="form-row align-items-center justify-content-between">
+                  <div class="col-auto my-1">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                      </div>
+                      <input type="number" [(ngModel)]="quote.price" class="form-control" aria-label="Amount (to the nearest dollar)" name="price{{quote.type}}">
+                      <div class="input-group-append">
+                        <span class="input-group-text">.00</span>
+                      </div>
+                    </div>
+                    </div>
+                  <div class="col-auto my-1">
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                      <input type="checkbox" [checked]="isQuoteValid(quote)" disabled class="custom-control-input" id="checkBox{{quote.type}}" name="cb{{quote.type}}">
+                      <label class="custom-control-label" for="checkBox{{quote.type}}">Verify</label>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </ng-container>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSaveQuotes(openedItem)">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #cardQuotTip let-type>
+  <ng-container *ngIf="type === 'MODELING'">MODEL</ng-container>
+  <ng-container *ngIf="type === 'POST_PRODUCTION'">POST</ng-container>
+  <ng-container *ngIf="type === 'QUALITY_ASSURANCE'"> QA </ng-container>
+</ng-template>
+
+</div>
+<div class="col-sm"></div>
+</div>
