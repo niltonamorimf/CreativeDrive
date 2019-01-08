@@ -21,8 +21,19 @@ O teste consiste em uma simulação de atendimento a suporte. Será passado cham
  - Reescreva este arquivo, o README.md, com as respostas;
  - Publique o projeto, com o arquivo README.md modificado, e com qualquer alteração que tenha sido feita.
 
+## Questões
 
-Questions:
+  Aba de gerenciamento de usuários:
+   
+   - Não é possível desselecionar usuários selessionados.
+   - Ao se clicar em detalhes aciona a seleção de usuário.
+   - Detalhes do usuário quebrado.
+   
+  Aba de gerenciamento de produtos:
+  
+   - Produtos com três quotes, a ultima desaparece caso seja validada com valor Zero. 
+   - Produto que é desvalidado após ser selecionado ainda é enviado no submit.
+Content:
 
 	1 - JavaScript object equality
 	2 - For loop and boolean operations
