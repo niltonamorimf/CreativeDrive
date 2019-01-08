@@ -3,13 +3,13 @@
   <div class="col-sm-9">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Question 1</h5>
-        <label for="palindromeInput">See if word is a Palindrome. Please, type the word below to teste it</label>
-        <div class="input-group mb-9" style="max-width: 500px;">
-          <input type="text" id="palindromeInput" class="form-control mw-25" placeholder="Type the word" aria-label="Type the palindrome" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" onclick="onCheck()">Button</button>
-          </div>
+        <h5 class="card-title">Página de Gerenciamento de usuário</h5>
+        <div class="card-text">
+          <p>
+            Nesta tela pode-se selecionar usuários que receberão a permissão de admin.
+            O fluxo seria só clicar na linha para adicionar um usuário.
+            Também é possível acessar os detalhes do usuário no icone mais a direita da linha.
+          </p>
         </div>
       </div>
     </div>
@@ -18,16 +18,16 @@
 
     <ul class="list-group">
       <li class="list-group-item">Users</li>
-      <li *ngFor="let item of displayedList; let i='index'"
-          (click)="selectUserRow(item)"
-          [ngClass]="{'list-group-item-light': isRowEven(i), 'list-group-item-dark': !isRowEven(i), 'active': isRowSelected(item._id)}"
+      <li *ngFor="let user of displayedList; let i='index'"
+          (click)="selectUserRow(user)"
+          [ngClass]="{'list-group-item-light': isRowEven(i), 'list-group-item-dark': !isRowEven(i), 'active': isRowSelected(user._id)}"
           class="list-group-item interactive"
           data-toggle="tooltip"
           data-placement="top"
-          [title]="!isRowSelected(item._id) ? 'Add user' : 'Remove User'">
+          [title]="!isRowSelected(user._id) ? 'Add user' : 'Remove User'">
         <div class="form-row align-items-center justify-content-between">
           <div>
-            {{item._id}}# {{item.name}}
+            {{user._id}}# {{user.name}}
           </div>
           <div data-toggle="tooltip"
             data-placement="top"
@@ -35,26 +35,13 @@
             <fa name="edit"
               data-toggle="modal"
               data-target="#userModal"
-              (click)="onOpenUserDetail(item._id)">
-              </fa>
-            
+              (click)="onOpenUserDetail(user._id)">
+            </fa>
           </div>
         </div>
       </li>
     </ul>
-
     <br>
-
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Answer</h5>
-        <label for="exampleFormControlTextarea1">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-    </div>
-
-    <br>
-
   </div>
   <div class="col-sm"></div>
 </div>
@@ -73,7 +60,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" >Save changes</button>
       </div>
     </div>
   </div>

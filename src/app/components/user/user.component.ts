@@ -66,11 +66,9 @@ export class UserComponent implements OnInit {
     }
   }
 
-  onOpenUserDetail(id) {
+  onOpenUserDetail(user) {
 
-    let user = null;
-
-    this._userService.getUser(id)
+    this._userService.getUser(user._id)
 
       .subscribe( res => this.selectedUser = res);
 

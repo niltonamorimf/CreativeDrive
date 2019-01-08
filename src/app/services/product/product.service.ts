@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { PRODUCTS } from './products';
 import { ApiService } from '../api/api.service';
 import { map } from 'rxjs/internal/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ProductService {
     this._products = this.newProductsRef(PRODUCTS);
   }
 
-  public get products() {
+  public get products(): Observable<any> {
     return this._api.get('getProductList')
       .pipe(map((res => {
         res = this._products;
@@ -23,7 +24,7 @@ export class ProductService {
     );
   }
 
-  public saveProduct(product) {
+  public saveProduct(product): Observable<any> {
     return this._api.post('saveProduct', {product: product})
       .pipe( map((res) => {
         this._products.forEach( (p, index, arr) => {
@@ -35,15 +36,21 @@ export class ProductService {
     }));
   }
 
-  public saveQuotes({sku, quotes}) {
+  public saveQuotes({sku, quotes}): Observable<any> {
     let body = {};
-    quotes.forEach( (quote) => body = {...body, [quote.type]: quote.price});
+    quotes.forEach( (quote) => {
+      if (quote.price) {
+        body = {...body, [quote.type]: quote.price};
+      }
+    });
 
     return this._api.post('saveProducQuotes', body, {sku: sku})
       .pipe( map( (res) => {
         const savedQuotes = [];
-        for (let key in res.quotes) {
-          savedQuotes.push({type: key, price: res.quotes[key]});
+        for (const key in res.quotes) {
+          if (res.quotes[key]) {
+            savedQuotes.push({type: key, price: res.quotes[key]});
+          }
         }
         this._products.forEach( (p, index, arr) => {
           if (p.sku === res.sku) {
@@ -54,7 +61,7 @@ export class ProductService {
       }));
   }
 
-  public chargeProducts(skuList) {
+  public chargeProducts(skuList): Observable<any> {
     return this._api.post('chargeProducts', {skuList: skuList})
       .pipe(map( res => {
         const list = skuList.filter( sku => {
@@ -65,7 +72,7 @@ export class ProductService {
       }));
   }
 
-  public getProduct(sku) {
+  public getProduct(sku): Observable<any> {
     return this._api.get('getProduct', {sku: sku})
       .pipe(map( res => this.newProductsRef(this._products.find( p => p.sku === sku))));
   }
@@ -83,7 +90,7 @@ export class ProductService {
     return product && product.quotes.filter( q => this.isQuoteValid(q)).length === product.quotes.length;
   }
 
-  public newProductsRef(object) {
+  public newProductsRef(object): any {
     return JSON.parse(JSON.stringify(object));
   }
 }

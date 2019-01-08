@@ -1,3 +1,20 @@
+<div class="row">
+  <div class="col-sm"></div>
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Página de Gerenciamento de produto</h5>
+        <div class="card-text">
+          <p>
+            Nesta tela pode-se selecionar produtos váidos a serem cobrados.
+            Os produtos precisam estar com todas as quotes com valor para serem considerados válidos.
+            O preenchimento das quotes é feito no detalhe de cada produto, acessado no icone de detalhes.
+          </p>
+        </div>
+      </div>
+    </div>
+  
+
 <div *ngIf="selectedProducts.length !== 0" class="card">
   <div class="card-body d-flex justify-content-between">
     <span>{{selectedProducts.length}} product{{selectedProducts.length === 1 ? '' : 's'}} selected </span>
@@ -47,25 +64,6 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm"></div>
-    <div class="col-sm-9">
-      <div class="container">
-
-        <br>
-
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Answer</h5>
-            <label for="exampleFormControlTextarea2">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
-          </div>
-        </div>
-      </div>
-    <div class="col-sm"></div>
   </div>
 </div>
 
@@ -124,3 +122,7 @@
   <ng-container *ngIf="type === 'POST_PRODUCTION'">POST</ng-container>
   <ng-container *ngIf="type === 'QUALITY_ASSURANCE'"> QA </ng-container>
 </ng-template>
+
+</div>
+<div class="col-sm"></div>
+</div>
