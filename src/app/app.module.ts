@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserModule } from './components/user/user.module';
 import { ProductModule } from './components/product/product.module';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ProductModule } from './components/product/product.module';
     BrowserModule,
     AppRoutingModule,
     ProductModule,
-    UserModule
+    UserModule,
+    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

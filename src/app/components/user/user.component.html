@@ -25,10 +25,21 @@
           data-toggle="tooltip"
           data-placement="top"
           [title]="!isRowSelected(item._id) ? 'Add user' : 'Remove User'">
-        <button  type="button"
-                 data-toggle="modal"
-                 data-target="#userModal" (click)="onOpenUserDetail(item._id)">OPEN</button>
-        {{item._id}}# {{item.name}}
+        <div class="form-row align-items-center justify-content-between">
+          <div>
+            {{item._id}}# {{item.name}}
+          </div>
+          <div data-toggle="tooltip"
+            data-placement="top"
+            title="Detail">
+            <fa name="edit"
+              data-toggle="modal"
+              data-target="#userModal"
+              (click)="onOpenUserDetail(item._id)">
+              </fa>
+            
+          </div>
+        </div>
       </li>
     </ul>
 

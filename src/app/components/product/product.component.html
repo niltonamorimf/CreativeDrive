@@ -34,12 +34,16 @@
             </ng-template>
           </li>
         </ul>
-        <div class="d-flex align-items-end">
-          <button class="btn btn-secondary"
-            type="button"
+        <div class="d-flex align-items-end"
+        data-toggle="tooltip"
+        data-placement="top"
+        [title]="'Detail'">
+          <fa name="edit"
+            class="detail-product-icon"
             data-toggle="modal"
             data-target="#detailModal"
-            (click)="onOpenDetail(product)">Open detail</button>
+            (click)="onOpenDetail(product)">
+          </fa>
         </div>
       </div>
     </div>
