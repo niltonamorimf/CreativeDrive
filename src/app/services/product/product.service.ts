@@ -37,24 +37,14 @@ export class ProductService {
   }
 
   public saveQuotes({sku, quotes}): Observable<any> {
-    let body = {};
-    quotes.forEach( (quote) => {
-      if (quote.price) {
-        body = {...body, [quote.type]: quote.price};
-      }
-    });
-
-    return this._api.post('saveProducQuotes', body, {sku: sku})
+    return this._api.post('saveProducQuotes', quotes, {sku: sku})
       .pipe( map( (res) => {
-        const savedQuotes = [];
-        for (const key in res.quotes) {
-          if (res.quotes[key]) {
-            savedQuotes.push({type: key, price: res.quotes[key]});
-          }
-        }
         this._products.forEach( (p, index, arr) => {
           if (p.sku === res.sku) {
-            arr[index].quotes = savedQuotes;
+            res.quotes.forEach( (q, i) => {
+              q = q.price ? q : {['type']: q.type};
+              arr[index].quotes[i] = q;
+            });
           }
         });
         return res;

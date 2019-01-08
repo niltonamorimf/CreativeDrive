@@ -10,6 +10,8 @@
             Os produtos precisam estar com todas as quotes com valor para serem considerados válidos.
             O preenchimento das quotes é feito no detalhe de cada produto, acessado no icone de detalhes.
           </p>
+          <p>As duas primeiras quotes precisam apresentar um valor acima de 0 para serem validas</p>
+          <p>A ultima quote pode apresentar um valor acima ou igual a 0 para ser valida</p>
         </div>
       </div>
     </div>
@@ -26,16 +28,16 @@
 <div class="d-flex flex-wrap">
   <div class="card product-card" *ngFor="let product of productList">
     <div class="card-body">
-      <h5 class="card-title d-flex justify-content-between">
-        {{product?.sku}}
+      <div class="card-title d-flex justify-content-between">
+        <h5>{{product?.sku}}</h5>
         <div *ngIf="validateProduct(product)" class="col-auto my-1">
-          <div class="custom-control product-info-check-box custom-checkbox mr-sm-2">
-            <input type="checkbox" [checked]="selectedProducts.indexOf(product.sku) !== -1" class="custom-control-input" (click)="selectProduct(product.sku)" id="checkBoxValid{{product.sku}}" name="cbV{{product?.sku}}">
+          <div class="custom-control selection-item product-info-check-box custom-checkbox mr-sm-2">
+            <input type="checkbox" class="" [checked]="selectedProducts.indexOf(product.sku) !== -1" class="custom-control-input" (click)="selectProduct(product.sku)" id="checkBoxValid{{product.sku}}" name="cbV{{product?.sku}}">
             <label class="custom-control-label" for="checkBoxValid{{product.sku}}">
               {{selectedProducts.indexOf(product.sku) !== -1 ? 'Selected' : 'Select'}}</label>
           </div>
         </div>
-      </h5>
+      </div>
       <p class="card-text"> {{product?.name}} </p>
       <div class="card-info d-flex justify-content-between">
         <ul class="list-group">
