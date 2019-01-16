@@ -79,6 +79,9 @@ export class ProductComponent implements OnInit {
 
   public validateProduct(product) {
 
+    if(product.quotes.filter( q => this.isQuoteValid(q)).length !== product.quotes.length){ // Produdo desvalidado tem a seleção removida
+      this.selectedProducts = this.selectedProducts.filter( s => s !== product.sku);
+    }
 
     return product && product.quotes.filter( q => this.isQuoteValid(q)).length === product.quotes.length;
 
@@ -94,12 +97,14 @@ export class ProductComponent implements OnInit {
 
       return true;
 
+    } else {
+
+      return false;
+
     }
 
-    return false;
-
   }
-
+  
   public selectProduct(sku) {
 
     if (this.selectedProducts.indexOf(sku) < 0) {

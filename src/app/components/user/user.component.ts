@@ -51,9 +51,9 @@ export class UserComponent implements OnInit {
 
   }
 
-  selectUserRow(userFromList) {
-
-    const user = {...userFromList};
+  selectUserRow(user) {
+    
+      //const user = {...userFromList}; // Array utilizada incorretamente
 
     if (this.selected.find( u => u === user)) {
 
@@ -67,6 +67,16 @@ export class UserComponent implements OnInit {
   }
 
   onOpenUserDetail(user) {
+
+    if (this.selected.find( u => u === user)) {
+
+      this.selected = this.selected.filter( u => u !== user);
+
+    } else {
+
+      this.selected.push(user);
+
+    }
 
     this._userService.getUser(user._id)
 
